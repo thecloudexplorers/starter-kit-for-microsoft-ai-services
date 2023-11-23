@@ -3,13 +3,13 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "cognitiveServiceName": {
-      "value": "dgs-s-cgs-oai002"
+      "value": "dgs-s-cgs-oai007"
     },
     "cognitiveServiceSku": {
       "value": "S0"
     },
     "resourceLocation": {
-      "value": "East US"
+      "value": "Sweden Central"
     }
   }
 }

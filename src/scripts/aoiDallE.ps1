@@ -15,7 +15,7 @@ $openAIApi = @{
 }
 
 # Text to describe image
-$prompt = 'Big person, small person, and a cat. Anime style'
+$prompt = 'Its Friday with dancing ninjas with japanese hats! Oil painting cartoon style.'
 
 # Header for authentication
 $headers = [ordered]@{
@@ -39,7 +39,6 @@ $restMethodArgs = @{
     Method      = 'Post'
     ContentType = 'application/json'
 }
-
 
 $submission = Invoke-RestMethod @restMethodArgs
 

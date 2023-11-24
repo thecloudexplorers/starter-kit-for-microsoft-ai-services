@@ -6,6 +6,9 @@ param keyVaultName string
 @sys.description('Authentication tenant for the Key Vault')
 param tenantId string
 
+@description('My users object id')
+param objectId string
+
 @sys.description('Service name')
 param cognitiveServiceName string
 
@@ -17,8 +20,8 @@ param resourceLocation string
 
 // Deployment name variables
 var deploymentNames = {
-  cognitiveService: 'startkit-aoi'
-  keyVault: 'startkit-kv'
+  cognitiveService: 'starter-kit--aoi-module'
+  keyVault: 'starter-kit-kv-module'
 }
 
 module cognitiveService '../az-modules/Microsoft.CognitiveServices/accounts/deploy.bicep' = {
@@ -42,6 +45,7 @@ module keyVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
     name: keyVaultName
     location: resourceLocation
     tenantId: tenantId
+    objectId: objectId
     secretName: 'cognitive-service-key'
     secretValue: existingCognitiveService.listKeys().key1
   }

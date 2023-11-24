@@ -11,6 +11,9 @@ param location string
 @description('KeyVault authentication tenant id')
 param tenantId string
 
+@description('My users object id')
+param objectId string
+
 @description('Name of the secret')
 param secretName string
 
@@ -28,7 +31,17 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
     }
     tenantId: tenantId
     enableSoftDelete: false
-    accessPolicies: []
+    accessPolicies: [
+      {
+        objectId: objectId
+        tenantId: tenantId
+        permissions: {
+          secrets: [
+            'all'
+          ]
+        }
+      }
+    ]
   }
 }
 

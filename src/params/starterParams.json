@@ -15,7 +15,10 @@
       "value": "dgs-s-cgs-kv001"
     },
     "tenantId": {
-      "value": "your-tenant-id"
+      "value": "<your-tenant-id>"
+    },
+    "objectId": {
+      "value": "<your-identity-object-id>"
     }
   }
 }

@@ -11,7 +11,7 @@ $apiKey = Get-AzKeyVaultSecret @keyVaultArgs
 $openAi = @{
     api_base    = 'https://dgs-s-cgs-oai007.openai.azure.com/' # your endpoint should look like the following https://YOUR_RESOURCE_NAME.openai.azure.com/
     api_version = '2023-05-15' # this may change in the future
-    name        = 'oai-gpt-35-turbo' #This will correspond to the custom name you chose for your deployment when you deployed a model.
+    name        = 'davinci-002' #This will correspond to the custom name you chose for your deployment when you deployed a model.
 }
 
 # Header for authentication
@@ -19,32 +19,28 @@ $headers = [ordered]@{
     'api-key' = $apiKey
 }
 
-
 # Completion text
-$messages = @()
-$messages += @{
-    role    = 'system'
-    content = 'You are an Xbox customer support agent whose primary goal is to help users with issues they are experiencing with their Xbox devices. You are friendly and concise. You only provide factual answers to queries, and do not provide answers that are not related to Xbox.'
-}
-# $messages += @{
-#     role    = 'user'
-#     content = 'How much is a PS5?'
-# }
-
-$messages += @{
-    role    = 'user'
-    content = 'What is hte cheapest version of an Xbox'
-}
+$prompt = 'Once upon a time...'
 
 # Adjust these values to fine-tune completions
 $body = [ordered]@{
-    messages = $messages
+    prompt      = $prompt
+    max_tokens  = 30
+    temperature = 2
+    top_p       = 0.5
 } | ConvertTo-Json
 
-# Send a request to generate an answer
-$url = "$($openAi.api_base)/openai/deployments/$($openAi.name)/chat/completions?api-version=$($openAi.api_version)"
+# Send a completion call to generate an answer
+$url = "$($openai.api_base)/openai/deployments/$($openai.name)/completions?api-version=$($openai.api_version)"
 
-$response = Invoke-RestMethod -Uri $url -Headers $headers -Body $body -Method Post -ContentType 'application/json'
-$response.choices.message
-$response.model
+$restMethodArgs = @{
+    Uri         = $url
+    Headers     = $headers
+    Body        = $body
+    Method      = 'Post'
+    ContentType = 'application/json'
+}
+
+$response = Invoke-RestMethod @restMethodArgs
+Write-Host $response.choices.text
 Write-Host "Stopped here!!!"

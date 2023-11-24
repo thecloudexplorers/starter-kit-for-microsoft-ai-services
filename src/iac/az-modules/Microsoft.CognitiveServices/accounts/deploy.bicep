@@ -22,7 +22,6 @@ resource cognitiveService 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: cognitiveServiceName
-
   }
 }
 
@@ -65,7 +64,7 @@ resource oaiGpt4Deployment 'Microsoft.CognitiveServices/accounts/deployments@202
   name: 'oai-gpt-4'
   sku: {
     name: 'Standard'
-    capacity: 10
+    capacity: 70 // The deployment will be created with a 10K TPM limit
   }
   properties: {
     model: {

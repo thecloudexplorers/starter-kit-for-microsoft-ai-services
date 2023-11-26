@@ -15,7 +15,7 @@ $openAIApi = @{
 }
 
 # Text to describe image
-$prompt = 'Its Friday with dancing ninjas with japanese hats! Oil painting cartoon style.'
+$prompt = 'Winter holiday celebration with a snowman and a Christmas tree, realistic and cartoonish.'
 
 # Header for authentication
 $headers = [ordered]@{

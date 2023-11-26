@@ -15,10 +15,10 @@
       "value": "dgs-s-cgs-kv001"
     },
     "tenantId": {
-      "value": "<your-tenant-id>"
+      "value": "a74be31f-7904-4c43-8ef5-c82967c8e559"
     },
     "objectId": {
-      "value": "<your-identity-object-id>"
+      "value": "d2f35049-89fd-4202-8cf2-916a076533be"
     }
   }
 }

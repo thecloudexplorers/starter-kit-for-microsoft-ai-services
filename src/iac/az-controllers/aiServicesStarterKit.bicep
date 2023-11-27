@@ -18,10 +18,30 @@ param cognitiveServiceSku string
 @sys.description('Location of the resource.')
 param resourceLocation string
 
+@sys.description('Sku of the storage account')
+param storageAccountSku string
+
+@sys.description('Sku of the storage account')
+param storageAccountName string
+
+@sys.description('Search service name')
+param searchName string
+
+@sys.description('Search service sku')
+param searchSku string
+
+@sys.description('Replicas distribute search workloads across the service.')
+param searchReplicaCount int
+
+@sys.description('Partitions allow for scaling of document count.')
+param searchPartitionCount int
+
 // Deployment name variables
 var deploymentNames = {
   cognitiveService: 'starter-kit--aoi-module'
   keyVault: 'starter-kit-kv-module'
+  storageAccount: 'starter-kit-sa-module'
+  searchService: 'starter-kit-search-module'
 }
 
 module cognitiveService '../az-modules/Microsoft.CognitiveServices/accounts/deploy.bicep' = {
@@ -48,5 +68,25 @@ module keyVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
     objectId: objectId
     secretName: 'cognitive-service-key'
     secretValue: existingCognitiveService.listKeys().key1
+  }
+}
+
+module storageAccount '../az-modules/Microsoft.Storage/storageaccounts/deploy.bicep' = {
+  name: deploymentNames.storageAccount
+  params: {
+    storageAccountName: storageAccountName
+    location: resourceLocation
+    sku: storageAccountSku
+  }
+}
+
+module searchService '../az-modules/Microsoft.Search/searchServices/deploy.bicep' = {
+  name: deploymentNames.searchService
+  params: {
+    name: searchName
+    location: resourceLocation
+    sku: searchSku
+    replicaCount: searchReplicaCount
+    partitionCount: searchPartitionCount
   }
 }

@@ -38,7 +38,7 @@ param searchPartitionCount int
 
 // Deployment name variables
 var deploymentNames = {
-  cognitiveService: 'starter-kit--aoi-module'
+  cognitiveService: 'starter-kit-aoi-module'
   keyVault: 'starter-kit-kv-module'
   storageAccount: 'starter-kit-sa-module'
   searchService: 'starter-kit-search-module'

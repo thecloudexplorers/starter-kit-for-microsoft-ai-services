@@ -15,10 +15,28 @@
       "value": "dgs-s-cgs-kv001"
     },
     "tenantId": {
-      "value": "a74be31f-7904-4c43-8ef5-c82967c8e559"
+      "value": ""
     },
     "objectId": {
-      "value": "d2f35049-89fd-4202-8cf2-916a076533be"
+      "value": ""
+    },
+    "storageAccountName": {
+      "value": "dgsscgssa001"
+    },
+    "storageAccountSku": {
+      "value": "Standard_LRS"
+    },
+    "searchName": {
+      "value": "dgs-s-cgs-srch001"
+    },
+    "searchSku": {
+      "value": "basic"
+    },
+    "searchReplicaCount": {
+      "value": 1
+    },
+    "searchPartitionCount": {
+      "value": 1
     }
   }
 }

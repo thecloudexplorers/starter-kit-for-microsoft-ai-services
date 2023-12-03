@@ -14,12 +14,26 @@ param tenantId string
 @description('My users object id')
 param objectId string
 
-@description('Name of the secret')
-param secretName string
+@description('Name of the cognitive service secret')
+param cognitiveServiceSecretName string
 
-@description('Name of the existing Cognitive Service')
+@description('Value of the cognitive service secret')
 @secure()
-param secretValue string
+param cognitiveServiceSecretValue string
+
+@description('Name of the search service secret')
+param searchServiceSecretName string
+
+@description('Value of the search service secret')
+@secure()
+param searchServiceSecretValue string
+
+@description('Name of the storage account secret')
+param storageAccountSecretName string
+
+@description('Value of the storage account secret')
+@secure()
+param storageAccountSecretValue string
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: name
@@ -45,10 +59,26 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   }
 }
 
-resource secret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+resource cognitiveServiceSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
   parent: keyVault
-  name: secretName
+  name: cognitiveServiceSecretName
   properties: {
-    value: secretValue
+    value: cognitiveServiceSecretValue
+  }
+}
+
+resource searchServiceSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+  parent: keyVault
+  name: searchServiceSecretName
+  properties: {
+    value: searchServiceSecretValue
+  }
+}
+
+resource storageAccountSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+  parent: keyVault
+  name: storageAccountSecretName
+  properties: {
+    value: storageAccountSecretValue
   }
 }

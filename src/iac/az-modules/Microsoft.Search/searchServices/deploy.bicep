@@ -34,7 +34,7 @@ param partitionCount int
 @description('Location for all resources.')
 param location string
 
-resource search 'Microsoft.Search/searchServices@2020-08-01' = {
+resource search 'Microsoft.Search/searchServices@2022-09-01' = {
   name: name
   location: location
   sku: {

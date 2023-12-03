@@ -59,6 +59,16 @@ resource existingCognitiveService 'Microsoft.CognitiveServices/accounts@2023-05-
   name: cognitiveServiceName
 }
 
+// Get a reference to the existing CognitiveServices account
+// This is needed to securely provide the key to the Key Vault resource
+resource existingSearchService 'Microsoft.Search/searchServices@2020-08-01' existing = {
+  name: searchName
+}
+
+resource existingStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' existing = {
+  name: storageAccountName
+}
+
 module keyVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
   name: deploymentNames.keyVault
   params: {
@@ -66,8 +76,12 @@ module keyVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
     location: resourceLocation
     tenantId: tenantId
     objectId: objectId
-    secretName: 'cognitive-service-key'
-    secretValue: existingCognitiveService.listKeys().key1
+    cognitiveServiceSecretName: 'cognitive-service-key'
+    cognitiveServiceSecretValue: existingCognitiveService.listKeys().key1
+    searchServiceSecretName: 'search-service-key'
+    searchServiceSecretValue: existingSearchService.listAdminKeys().primaryKey
+    storageAccountSecretName: 'storage-account-connection-string'
+    storageAccountSecretValue: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${existingStorageAccount.listKeys().keys[0].value}'
   }
 }
 

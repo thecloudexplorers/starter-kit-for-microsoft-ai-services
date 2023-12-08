@@ -3,31 +3,31 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "cognitiveServiceName": {
-      "value": "dgs-s-cgs-oai007"
+      "value": "dgs-s-cgs-oai010"
     },
     "cognitiveServiceSku": {
       "value": "S0"
     },
     "resourceLocation": {
-      "value": "Sweden Central"
+      "value": "North Central US"
     },
     "keyVaultName": {
-      "value": "dgs-s-cgs-kv001"
+      "value": "dgs-s-cgs-kv010"
     },
-    "tenantId": {
-      "value": ""
-    },
+    // "tenantId": {
+    //   "value": ""
+    // },
     "objectId": {
       "value": ""
     },
     "storageAccountName": {
-      "value": "dgsscgssa001"
+      "value": "dgsscgssa010"
     },
     "storageAccountSku": {
       "value": "Standard_LRS"
     },
     "searchName": {
-      "value": "dgs-s-cgs-srch001"
+      "value": "dgs-s-cgs-srch010"
     },
     "searchSku": {
       "value": "basic"

@@ -4,7 +4,7 @@ targetScope = 'resourceGroup'
 param keyVaultName string
 
 @sys.description('Authentication tenant for the Key Vault')
-param tenantId string
+param tenantId string = tenant().tenantId
 
 @description('My users object id')
 param objectId string
@@ -46,6 +46,10 @@ var deploymentNames = {
 
 module cognitiveService '../az-modules/Microsoft.CognitiveServices/accounts/deploy.bicep' = {
   name: deploymentNames.cognitiveService
+  dependsOn: [
+    searchService
+    storageAccount
+  ]
   params: {
     cognitiveServiceName: cognitiveServiceName
     location: resourceLocation
@@ -65,12 +69,17 @@ resource existingSearchService 'Microsoft.Search/searchServices@2020-08-01' exis
   name: searchName
 }
 
-resource existingStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' existing = {
-  name: storageAccountName
-}
+// resource existingStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' existing = {
+//   name: storageAccountName
+// }
 
 module keyVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
   name: deploymentNames.keyVault
+  dependsOn: [
+    searchService
+    storageAccount
+    cognitiveService
+  ]
   params: {
     name: keyVaultName
     location: resourceLocation
@@ -78,10 +87,10 @@ module keyVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
     objectId: objectId
     cognitiveServiceSecretName: 'cognitive-service-key'
     cognitiveServiceSecretValue: existingCognitiveService.listKeys().key1
-    searchServiceSecretName: 'search-service-key'
-    searchServiceSecretValue: existingSearchService.listAdminKeys().primaryKey
-    storageAccountSecretName: 'storage-account-connection-string'
-    storageAccountSecretValue: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${existingStorageAccount.listKeys().keys[0].value}'
+    // searchServiceSecretName: 'search-service-key'
+    // searchServiceSecretValue: existingSearchService.listAdminKeys().primaryKey
+    // storageAccountSecretName: 'storage-account-connection-string'
+    // storageAccountSecretValue: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${existingStorageAccount.listKeys().keys[0].value}'
   }
 }
 

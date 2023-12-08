@@ -21,19 +21,19 @@ param cognitiveServiceSecretName string
 @secure()
 param cognitiveServiceSecretValue string
 
-@description('Name of the search service secret')
-param searchServiceSecretName string
+// @description('Name of the search service secret')
+// param searchServiceSecretName string
 
-@description('Value of the search service secret')
-@secure()
-param searchServiceSecretValue string
+// @description('Value of the search service secret')
+// @secure()
+// param searchServiceSecretValue string
 
-@description('Name of the storage account secret')
-param storageAccountSecretName string
+// @description('Name of the storage account secret')
+// param storageAccountSecretName string
 
-@description('Value of the storage account secret')
-@secure()
-param storageAccountSecretValue string
+// @description('Value of the storage account secret')
+// @secure()
+// param storageAccountSecretValue string
 
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: name
@@ -43,18 +43,18 @@ resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
       family: 'A'
       name: 'standard'
     }
-    tenantId: tenantId
+    tenantId: tenant().tenantId
     enableSoftDelete: false
     accessPolicies: [
-      {
-        objectId: objectId
-        tenantId: tenantId
-        permissions: {
-          secrets: [
-            'all'
-          ]
-        }
-      }
+      // {
+      //   objectId: objectId
+      //   tenantId: tenant().tenantId
+      //   permissions: {
+      //     secrets: [
+      //       'all'
+      //     ]
+      //   }
+      // }
     ]
   }
 }
@@ -67,18 +67,18 @@ resource cognitiveServiceSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' =
   }
 }
 
-resource searchServiceSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
-  parent: keyVault
-  name: searchServiceSecretName
-  properties: {
-    value: searchServiceSecretValue
-  }
-}
+// resource searchServiceSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+//   parent: keyVault
+//   name: searchServiceSecretName
+//   properties: {
+//     value: searchServiceSecretValue
+//   }
+// }
 
-resource storageAccountSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
-  parent: keyVault
-  name: storageAccountSecretName
-  properties: {
-    value: storageAccountSecretValue
-  }
-}
+// resource storageAccountSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+//   parent: keyVault
+//   name: storageAccountSecretName
+//   properties: {
+//     value: storageAccountSecretValue
+//   }
+// }

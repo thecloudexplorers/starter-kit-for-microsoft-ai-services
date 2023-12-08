@@ -5,6 +5,8 @@ param cognitiveServiceName string
 @allowed([
   'East US'
   'Sweden Central'
+  'West Europe'
+  'North Central US'
 ])
 param location string
 

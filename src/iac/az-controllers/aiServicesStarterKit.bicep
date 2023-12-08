@@ -52,7 +52,6 @@ module cognitiveService '../az-modules/Microsoft.CognitiveServices/accounts/depl
     sku: cognitiveServiceSku
   }
 }
-
 // Get a reference to the existing CognitiveServices account
 // This is needed to securely provide the key to the Key Vault resource
 resource existingCognitiveService 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
@@ -83,6 +82,11 @@ module keyVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
     storageAccountSecretName: 'storage-account-connection-string'
     storageAccountSecretValue: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${existingStorageAccount.listKeys().keys[0].value}'
   }
+  dependsOn: [
+    cognitiveService
+    searchService
+    storageAccount
+  ]
 }
 
 module storageAccount '../az-modules/Microsoft.Storage/storageaccounts/deploy.bicep' = {

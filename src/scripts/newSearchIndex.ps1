@@ -15,9 +15,9 @@ $saKeyVaultArgs = @{
 $indexName = "kia-ev9-index"
 $indexerName = "kia-ev9-indexer"
 $defaultSearchIndexJsonFilePath = "./src/params/defaultSearchIndex.json"
-$searchServiceName = "dgs-s-cgs-srch001"
-$dataSourceName = "dgsscgssa001"
-$dataSourceContainerName = "fileupload-kia-ev9"
+$searchServiceName = "dgs-s-cgs-srch007"
+$dataSourceName = "dgsscgssa007"
+$dataSourceContainerName = "fileupload-index-007"
 $searchServicePrimaryKey = Get-AzKeyVaultSecret @ssKeyVaultArgs
 $storageAccountConnectionString = Get-AzKeyVaultSecret @saKeyVaultArgs
 
@@ -30,10 +30,28 @@ $headers = @{
     'Accept'       = 'application/json'
 }
 
-$url = "https://$searchServiceName.search.windows.net/indexes?api-version=2023-11-01"
-Invoke-RestMethod -Uri $url -Headers $headers -Method POST -Body $defaultSearchIndexDefinition
+# create index
+$postIndexesUri = "https://$searchServiceName.search.windows.net/indexes?api-version=2023-11-01"
+$getIndexesUri = "https://$searchServiceName.search.windows.net/indexes/$($indexName)?api-version=2023-11-01"
 
+$indexExists = Invoke-RestMethod -Uri $getIndexesUri -Headers $headers -Method GET -SkipHttpErrorCheck -StatusCodeVariable "httpResponseCodeIndexesApi"
 
+switch ($httpResponseCodeIndexesApi) {
+    '404' {
+        # Index doest exists
+        $indexExists = Invoke-RestMethod -Uri $postIndexesUri -Headers $headers -Method POST -Body $defaultSearchIndexDefinition
+        Write-Host "Index [$($indexExists.name)] created"
+    }
+    '200' {
+        # Index exists
+        Write-Host "Index [$($indexExists.name)] already exists, skipping creation"
+    }
+    Default {
+        Write-Exception "Unexpected response code: $httpResponseCode" -ErrorAction Stop
+    }
+}
+
+# create data source
 $jsonSearchDataSource = @{
     name                        = $dataSourceName
     description                 = $null
@@ -58,7 +76,7 @@ $url = "https://$searchServiceName.search.windows.net/datasources?api-version=20
 
 Invoke-RestMethod -Uri $url -Headers $headers -Method POST -Body $searchDataSource
 
-
+# create indexer
 $jsonIndexer = @{
     name            = $indexerName
     dataSourceName  = $dataSourceName

@@ -42,6 +42,7 @@ var deploymentNames = {
   keyVault: 'starter-kit-kv-module'
   storageAccount: 'starter-kit-sa-module'
   searchService: 'starter-kit-search-module'
+  roleAssignments: 'starter-kit-assignments-module'
 }
 
 module cognitiveService '../az-modules/Microsoft.CognitiveServices/accounts/deploy.bicep' = {
@@ -111,5 +112,17 @@ module searchService '../az-modules/Microsoft.Search/searchServices/deploy.bicep
     sku: searchSku
     replicaCount: searchReplicaCount
     partitionCount: searchPartitionCount
+  }
+}
+
+module roleAssignments '../az-modules/Microsoft.Authorization/roleAssignments/deploy.bicep' = {
+  name: deploymentNames.roleAssignments
+  params: {
+    principalId: '222d2893-01fb-4bec-ba76-62dc60e6af92'
+    roleDefinitions: [
+      'Cognitive Services Contributor'
+      'Cognitive Services OpenAI Contributor'
+    ]
+    principalType: 'User'
   }
 }

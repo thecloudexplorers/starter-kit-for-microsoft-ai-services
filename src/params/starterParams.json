@@ -14,9 +14,6 @@
     "keyVaultName": {
       "value": "dgs-s-cgs-kv010"
     },
-    // "tenantId": {
-    //   "value": ""
-    // },
     "objectId": {
       "value": ""
     },

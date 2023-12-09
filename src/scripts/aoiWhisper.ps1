@@ -19,17 +19,19 @@ $url = "$($openAi.api_base)/openai/deployments/$($openAi.name)/audio/transcripti
 
 $filePath = Get-Location | Join-Path -ChildPath "src/scripts/resources/AdventCalendar-Day1-slice.mp4"
 
-# C:\repos\wes\aiadventcalendar\starter-kit-for-microsoft-ai-services
-# C:\repos\wes\aiadventcalendar\starter-kit-for-microsoft-ai-services\src\scripts\resources\AdventCalendar-Day1-slice.mp4
-# C:\repos\wes\aiadventcalendar\starter-kit-for-microsoft-ai-services\resources\AdventCalendar-Day1-slice.mp4
-
 # Curl command
 curl $url `
     -H "api-key: $apiKey" `
     -H "Content-Type: multipart/form-data" `
     -F "file=@$filePath"
 
-# # PowerShell command
+# PowerShell command
+# Invoke-WebRequest -Uri $url `
+#     -Headers @{"api-key" = $apiKey; "Content-Type" = "multipart/form-data" } `
+#     -InFile $filePath `
+#     -Method Post
+
+# # Powershell + dotnet library
 # $httpClient = New-Object System.Net.Http.HttpClient
 # $httpClient.DefaultRequestHeaders.Add("api-key", $apiKey)
 
@@ -42,5 +44,3 @@ curl $url `
 # $response = $httpClient.PostAsync($url, $content).Result
 
 # $response.Content.ReadAsStringAsync().Result
-
-# Write-Host "Stopped here!!!"

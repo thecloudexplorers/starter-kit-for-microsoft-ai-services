@@ -47,25 +47,13 @@ var deploymentNames = {
 module cognitiveService '../az-modules/Microsoft.CognitiveServices/accounts/deploy.bicep' = {
   name: deploymentNames.cognitiveService
   params: {
+    keyName: 'aoiEncryptionKey'
+    keyVersion: '3c55b384fbdd4e31a6795ae3d19596f1'
+    keyVaultUri: 'https://dgs-s-cgs-kv002.vault.azure.net/'
     cognitiveServiceName: cognitiveServiceName
     location: resourceLocation
     sku: cognitiveServiceSku
   }
-}
-// Get a reference to the existing CognitiveServices account
-// This is needed to securely provide the key to the Key Vault resource
-resource existingCognitiveService 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
-  name: cognitiveServiceName
-}
-
-// Get a reference to the existing CognitiveServices account
-// This is needed to securely provide the key to the Key Vault resource
-resource existingSearchService 'Microsoft.Search/searchServices@2020-08-01' existing = {
-  name: searchName
-}
-
-resource existingStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' existing = {
-  name: storageAccountName
 }
 
 module keyVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
@@ -107,4 +95,23 @@ module searchService '../az-modules/Microsoft.Search/searchServices/deploy.bicep
     replicaCount: searchReplicaCount
     partitionCount: searchPartitionCount
   }
+  dependsOn: [
+    cognitiveService
+  ]
+}
+
+// Get a reference to the existing CognitiveServices account
+// This is needed to securely provide the key to the Key Vault resource
+resource existingCognitiveService 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
+  name: cognitiveServiceName
+}
+
+// Get a reference to the existing CognitiveServices account
+// This is needed to securely provide the key to the Key Vault resource
+resource existingSearchService 'Microsoft.Search/searchServices@2020-08-01' existing = {
+  name: searchName
+}
+
+resource existingStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' existing = {
+  name: storageAccountName
 }

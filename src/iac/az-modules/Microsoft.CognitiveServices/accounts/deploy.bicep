@@ -13,6 +13,15 @@ param location string
 ])
 param sku string
 
+@description('Name of the encryption key')
+param keyName string
+
+@description('Key Vault URI')
+param keyVaultUri string
+
+@description('Version of the encryption key')
+param keyVersion string
+
 resource cognitiveService 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: cognitiveServiceName
   location: location
@@ -20,8 +29,19 @@ resource cognitiveService 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
     name: sku
   }
   kind: 'OpenAI'
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     customSubDomainName: cognitiveServiceName
+    encryption: {
+      keySource: 'Microsoft.Keyvault'
+      keyVaultProperties: {
+        keyName: keyName
+        keyVaultUri: keyVaultUri
+        keyVersion: keyVersion
+      }
+    }
   }
 }
 

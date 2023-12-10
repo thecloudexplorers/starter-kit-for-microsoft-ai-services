@@ -1,26 +1,17 @@
-# azure-iac-repo-structure-starter-kit
+# starter-kit-for-microsoft-ai-services
 
-This starter kit repository is a [template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) which is intended as a foundational
-starting point to help any user to quickly set up, organize, and structure their
-Infrastructure as Code (IaC) projects when working with Azure Cloud services.
-It is an example that is based on best practices, personal experiences, and
-guidelines for creating and organizing code and resources tailored for Azure
-infrastructure deployment.\
-The goal of this repository is to help engineers reduce their start-up time by
-providing the necessary structure.
+This starter kit has been written during the learning process, and now, everyone is invited to
+contribute their learning paths, insights, and experiences to collectively accelerate the
+community's journey into Microsoft AI.
 
-## How to use this repository
+## Purpose
 
-The details are described in the blog post [Chaos to Order: Structuring IaC repository Like a Boss! 👑](https://www.devjev.nl/posts/2023/chaos-to-order-structuring-iac-repository-like-a-boss/).
-It is recommended to read the blog post first before using this repository.
+The core purpose of this repository is to serve as a learning platform where both the author and
+any user can contribute to the exploration of Microsoft's AI capabilities. As we all learn together,
+this starter kit becomes a valuable resource for users at various stages of their AI learning
+journey.
 
-Other then that the repository is self-explanatory. With each of the folders containing a README.md
-file which explains the purpose of the concerning folder and how to use it. Feel free to browse
-through the structure and remember that this is a starter kit. You can use it as a starting point
-and modify it to fit your specific needs.
+## Contribution
 
-To modify the structure to fit your specific needs, you can use the following steps:
-1. Clone or fork the repo
-2. Modify the structure to fit your specific needs
-3. Star and watch it to keep track of updates
-4. Follow me on [LinkedIn](https://www.linkedin.com/in/jev-suchoi/) ;-)
+Contributions from the community are not just welcomed; they are the essence of this learning space.
+Open an issue, start a discussion, or submit a pull request to enrich our collective understanding.

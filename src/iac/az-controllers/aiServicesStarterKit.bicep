@@ -1,13 +1,22 @@
 targetScope = 'resourceGroup'
 
-@sys.description('Key Vault name')
-param keyVaultName string
+@sys.description('Main Key Vault name')
+param mainVaultName string
 
-@sys.description('Authentication tenant for the Key Vault')
-param tenantId string
+@sys.description('Main Key Vault name')
+param dataEncryptionVaultName string
+
+@sys.description('Data encryption Key Vault Uri')
+param dataEncryptionVaultUri string
+
+@sys.description('Encryptionkey name')
+param dataEncryptionKeyName string
+
+@sys.description('Encryptionkey version')
+param dataEncryptionKeyVersion string
 
 @description('My users object id')
-param objectId string
+param theCloudExplorerUserObjectId string
 
 @sys.description('Service name')
 param cognitiveServiceName string
@@ -39,7 +48,7 @@ param searchPartitionCount int
 // Deployment name variables
 var deploymentNames = {
   cognitiveService: 'starter-kit-aoi-module'
-  keyVault: 'starter-kit-kv-module'
+  mainKeyVault: 'starter-kit-main-kv-module'
   storageAccount: 'starter-kit-sa-module'
   searchService: 'starter-kit-search-module'
 }
@@ -47,28 +56,20 @@ var deploymentNames = {
 module cognitiveService '../az-modules/Microsoft.CognitiveServices/accounts/deploy.bicep' = {
   name: deploymentNames.cognitiveService
   params: {
-    keyName: 'aoiEncryptionKey'
-    keyVersion: '3c55b384fbdd4e31a6795ae3d19596f1'
-    keyVaultUri: 'https://dgs-s-cgs-kv002.vault.azure.net/'
+    keyName: dataEncryptionKeyName
+    keyVersion: dataEncryptionKeyVersion
+    keyVaultUri: dataEncryptionVaultUri
     cognitiveServiceName: cognitiveServiceName
     location: resourceLocation
     sku: cognitiveServiceSku
   }
 }
 
-module keyVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
-  name: deploymentNames.keyVault
+module mainVault '../az-modules/Microsoft.KeyVault/vaults/deploy.bicep' = {
+  name: deploymentNames.mainKeyVault
   params: {
-    name: keyVaultName
+    name: mainVaultName
     location: resourceLocation
-    tenantId: tenantId
-    objectId: objectId
-    cognitiveServiceSecretName: 'cognitive-service-key'
-    cognitiveServiceSecretValue: existingCognitiveService.listKeys().key1
-    searchServiceSecretName: 'search-service-key'
-    searchServiceSecretValue: existingSearchService.listAdminKeys().primaryKey
-    storageAccountSecretName: 'storage-account-connection-string'
-    storageAccountSecretValue: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${existingStorageAccount.listKeys().keys[0].value}'
   }
   dependsOn: [
     cognitiveService
@@ -97,6 +98,7 @@ module searchService '../az-modules/Microsoft.Search/searchServices/deploy.bicep
   }
   dependsOn: [
     cognitiveService
+    storageAccount
   ]
 }
 
@@ -114,4 +116,80 @@ resource existingSearchService 'Microsoft.Search/searchServices@2020-08-01' exis
 
 resource existingStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' existing = {
   name: storageAccountName
+}
+
+resource existingMainVaultName 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: mainVaultName
+}
+
+resource existingDataEncryptionVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
+  name: dataEncryptionVaultName
+}
+
+resource cognitiveServiceSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+  parent: existingMainVaultName
+  name: 'cognitive-service-key'
+  properties: {
+    value: existingCognitiveService.listKeys().key1
+  }
+}
+
+resource searchServiceSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+  parent: existingMainVaultName
+  name: 'search-service-key'
+  properties: {
+    value: existingSearchService.listAdminKeys().primaryKey
+  }
+}
+
+resource storageAccountSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+  parent: existingMainVaultName
+  name: 'storage-account-connection-string'
+  properties: {
+    value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${existingStorageAccount.listKeys().keys[0].value}'
+  }
+}
+
+resource theCloudExplorerPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2022-07-01' = {
+  name: 'add'
+  parent: existingMainVaultName
+  properties: {
+    accessPolicies: [
+      {
+        tenantId: subscription().tenantId
+        permissions: {
+          keys: [
+            'all'
+          ]
+          secrets: [
+            'all'
+          ]
+          storage: [
+            'all'
+          ]
+        }
+        objectId: theCloudExplorerUserObjectId
+      }
+    ]
+  }
+}
+
+resource cognitiveServicePolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-06-01-preview' = {
+  name: 'add'
+  parent: existingDataEncryptionVault
+  properties: {
+    accessPolicies: [
+      {
+        tenantId: subscription().tenantId
+        permissions: {
+          keys: [
+            'unwrapKey'
+            'wrapKey'
+            'get'
+          ]
+        }
+        objectId: existingCognitiveService.identity.principalId
+      }
+    ]
+  }
 }

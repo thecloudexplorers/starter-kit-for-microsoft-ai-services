@@ -77,6 +77,9 @@ resource oaiDalle3Deployment 'Microsoft.CognitiveServices/accounts/deployments@2
     }
     versionUpgradeOption: 'OnceNewDefaultVersionAvailable' //NoAutoUpgrade, OnceCurrentVersionExpired, OnceNewDefaultVersionAvailable
   }
+  dependsOn: [
+    oaiGpt35TurboDeployment
+  ]
 }
 
 resource oaiGpt4Deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -94,4 +97,7 @@ resource oaiGpt4Deployment 'Microsoft.CognitiveServices/accounts/deployments@202
     }
     versionUpgradeOption: 'OnceNewDefaultVersionAvailable' //NoAutoUpgrade, OnceCurrentVersionExpired, OnceNewDefaultVersionAvailable
   }
+  dependsOn: [
+    oaiDalle3Deployment
+  ]
 }

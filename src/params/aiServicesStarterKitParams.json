@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "cognitiveServiceName": {
+      "value": "dgs-s-cgs-oai007"
+    },
+    "cognitiveServiceSku": {
+      "value": "S0"
+    },
+    "resourceLocation": {
+      "value": "Sweden Central"
+    },
+    "mainVaultName": {
+      "value": "dgs-s-cgs-kv001"
+    },
+    "dataEncryptionVaultName": {
+      "value": "dgs-s-cgs-kv002"
+    },
+    "dataEncryptionVaultUri": {
+      "value": "https://dgs-s-cgs-kv002.vault.azure.net/"
+    },
+    "dataEncryptionKeyName": {
+      "value": "aoiEncryptionKey"
+    },
+    "dataEncryptionKeyVersion": {
+      "value": "3c55b384fbdd4e31a6795ae3d19596f1"
+    },
+    "theCloudExplorerUserObjectId": {
+      "value": "d2f35049-89fd-4202-8cf2-916a076533be"
+    },
+    "storageAccountName": {
+      "value": "dgsscgssa007"
+    },
+    "storageAccountSku": {
+      "value": "Standard_LRS"
+    },
+    "searchName": {
+      "value": "dgs-s-cgs-srch007"
+    },
+    "searchSku": {
+      "value": "basic"
+    },
+    "searchReplicaCount": {
+      "value": 1
+    },
+    "searchPartitionCount": {
+      "value": 1
+    }
+  }
+}

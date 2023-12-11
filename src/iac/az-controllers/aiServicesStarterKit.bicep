@@ -6,9 +6,6 @@ param mainVaultName string
 @sys.description('Main Key Vault name')
 param dataEncryptionVaultName string
 
-@sys.description('Data encryption Key Vault Uri')
-param dataEncryptionVaultUri string
-
 @sys.description('Encryptionkey name')
 param dataEncryptionKeyName string
 
@@ -58,7 +55,7 @@ module cognitiveService '../az-modules/Microsoft.CognitiveServices/accounts/depl
   params: {
     keyName: dataEncryptionKeyName
     keyVersion: dataEncryptionKeyVersion
-    keyVaultUri: dataEncryptionVaultUri
+    keyVaultUri: existingDataEncryptionVault.properties.vaultUri
     cognitiveServiceName: cognitiveServiceName
     location: resourceLocation
     sku: cognitiveServiceSku
@@ -126,6 +123,15 @@ resource existingDataEncryptionVault 'Microsoft.KeyVault/vaults@2023-02-01' exis
   name: dataEncryptionVaultName
 }
 
+// Experimental, needs more research
+// resource existingDataEncryptionKey 'Microsoft.KeyVault/vaults/keys@2022-07-01' existing = {
+//   name: dataEncryptionKeyName
+// }
+
+// resource existingDataEncryptionKeyVersion 'Microsoft.KeyVault/vaults/keys/versions@2022-07-01' existing = {
+//   name: dataEncryptionKeyName
+// }
+
 resource cognitiveServiceSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
   parent: existingMainVaultName
   name: 'cognitive-service-key'
@@ -192,4 +198,7 @@ resource cognitiveServicePolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-0
       }
     ]
   }
+  dependsOn: [
+    cognitiveService
+  ]
 }

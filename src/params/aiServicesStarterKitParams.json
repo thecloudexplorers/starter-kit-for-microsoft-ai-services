@@ -17,9 +17,6 @@
     "dataEncryptionVaultName": {
       "value": "dgs-s-cgs-kv002"
     },
-    "dataEncryptionVaultUri": {
-      "value": "https://dgs-s-cgs-kv002.vault.azure.net/"
-    },
     "dataEncryptionKeyName": {
       "value": "aoiEncryptionKey"
     },

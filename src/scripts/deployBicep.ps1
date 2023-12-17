@@ -4,7 +4,7 @@ $deployDataEncryption = @{
     TemplateFile          = "./src/iac/az-controllers/dataEncryption.bicep"
     TemplateParameterFile = "./src/params/dataEncryptionParams.json"
     ResourceGroupName     = "dgs-s-cgs-rg001"
-    Name                  = "starter-kit-controller"
+    Name                  = "data-encryption-controller"
 }
 
 New-AzResourceGroupDeployment @deployDataEncryption

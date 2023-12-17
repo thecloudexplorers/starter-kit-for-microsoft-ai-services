@@ -7,6 +7,9 @@
     },
     "resourceLocation": {
       "value": "Sweden Central"
+    },
+    "cognitiveServiceName": {
+      "value": "dgs-s-cgs-oai007"
     }
   }
 }

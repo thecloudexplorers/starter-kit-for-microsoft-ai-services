@@ -111,26 +111,23 @@ resource existingSearchService 'Microsoft.Search/searchServices@2020-08-01' exis
   name: searchName
 }
 
+// Get a reference to the existing storage account
+// This is needed to securely provide the key to the Key Vault resource
 resource existingStorageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' existing = {
   name: storageAccountName
 }
 
+// Get a reference to the existing storage account
+// This is needed to securely provide the key to the Key Vault resource
 resource existingMainVaultName 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: mainVaultName
 }
-
+// Get a reference to the existing CognitiveServices account
+// This is needed to sprovide correct permissions to the cognitive service managed identity
+// to retrieve the encryption key from the Key Vault resource
 resource existingDataEncryptionVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
   name: dataEncryptionVaultName
 }
-
-// Experimental, needs more research
-// resource existingDataEncryptionKey 'Microsoft.KeyVault/vaults/keys@2022-07-01' existing = {
-//   name: dataEncryptionKeyName
-// }
-
-// resource existingDataEncryptionKeyVersion 'Microsoft.KeyVault/vaults/keys/versions@2022-07-01' existing = {
-//   name: dataEncryptionKeyName
-// }
 
 resource cognitiveServiceSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
   parent: existingMainVaultName

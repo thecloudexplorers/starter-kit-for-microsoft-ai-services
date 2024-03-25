@@ -6,9 +6,9 @@ community's journey into Microsoft AI.
 
 Each branch corresponds to a video part of the [YouTube series: Microsoft AI - Advent calendar](https://www.youtube.com/watch?v=w7vU_szVncI&list=PLnh_yRm70-C2QtNLJ4q3_-O91EqjJbRbx)
 
-## Microsoft AI - Advent calendar - Day 02: How to deploy Azure OpenAI Service using Bicep IaC
+## Day 05: What are models and how to use them in Azure OpenAI Service
 
-YouTube video: [Microsoft AI - Advent calendar - Day 05: What are models and how to use them in Azure OpenAI Service](https://youtu.be/LdKUmuzWmFs)
+[YouTube video](https://youtu.be/LdKUmuzWmFs)
 
 An exploration video of the Azure Open AI service. Exploring:
 

@@ -15,14 +15,15 @@ How to deploy Azure Open AI Service using Bicep Infrastructure as Code?
 
 - Setting up a repository structure
 - How to set-up modules
-- How to set-up a controller to consume modules modules
+- How to set-up a controller to consume modules
 - Using parameters
 - Create a PowerShell snippet to deploy bicep
 - Using PowerShell to execute the deployment
 
 External links:
-[Create an Azure AI services resource using Bicep](https://learn.microsoft.com/en-us/azure/ai-services/create-account-bicep?tabs=PowerShell&wt.mc_id=DT-MVP-5005327)
-[Microsoft.CognitiveServices accounts](https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts?pivots=deployment-language-bicep&wt.mc_id=DT-MVP-5005327)
+
+- [Create an Azure AI services resource using Bicep](https://learn.microsoft.com/en-us/azure/ai-services/create-account-bicep?tabs=PowerShell&wt.mc_id=DT-MVP-5005327)
+- [Microsoft.CognitiveServices accounts](https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts?pivots=deployment-language-bicep&wt.mc_id=DT-MVP-5005327)
 
 ## Contribution
 

@@ -4,12 +4,26 @@ This starter kit has been written during the learning process, and now, everyone
 contribute their learning paths, insights, and experiences to collectively accelerate the
 community's journey into Microsoft AI.
 
-## Purpose
+Each branch corresponds to a video part of the [YouTube series: Microsoft AI - Advent calendar](https://www.youtube.com/watch?v=w7vU_szVncI&list=PLnh_yRm70-C2QtNLJ4q3_-O91EqjJbRbx)
 
-The core purpose of this repository is to serve as a learning platform where both the author and
-any user can contribute to the exploration of Microsoft's AI capabilities. As we all learn together,
-this starter kit becomes a valuable resource for users at various stages of their AI learning
-journey.
+## Microsoft AI - Advent calendar - Day 02: How to deploy Azure OpenAI Service using Bicep IaC
+
+YouTube video: [Microsoft AI - Advent calendar - Day 03: How to deploy Azure OpenAI Service using Terraform](https://youtu.be/_qhzGh3U1tA)
+
+An exploration video of the Azure Open AI service: How to deploy Azure Open AI Service using Terraform Infrastructure as Code?
+
+- Bootstrapping Terraform
+- Setting up a repository structure
+- How to set-up modules
+- How to set-up a controller to consume modules
+- Using parameters
+
+Sources:
+https://github.com/thecloudexplorers/starter-kit-for-microsoft-ai-services/tree/day-3
+
+Links:
+https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts?pivots=deployment-language-terraform&wt.mc_id=DT-MVP-5005327
+https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cognitive_account#custom_subdomain_name
 
 ## Contribution
 

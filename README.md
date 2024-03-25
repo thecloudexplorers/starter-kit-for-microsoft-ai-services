@@ -18,12 +18,9 @@ An exploration video of the Azure Open AI service: How to deploy Azure Open AI S
 - How to set-up a controller to consume modules
 - Using parameters
 
-Sources:
-https://github.com/thecloudexplorers/starter-kit-for-microsoft-ai-services/tree/day-3
-
 Links:
-https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts?pivots=deployment-language-terraform&wt.mc_id=DT-MVP-5005327
-https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cognitive_account#custom_subdomain_name
+[Microsoft.CognitiveServices accounts](https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts?pivots=deployment-language-terraform&wt.mc_id=DT-MVP-5005327)
+[Terraform Registry - azurerm_cognitive_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cognitive_account#custom_subdomain_name)
 
 ## Contribution
 

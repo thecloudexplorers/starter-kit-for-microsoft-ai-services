@@ -4,12 +4,25 @@ This starter kit has been written during the learning process, and now, everyone
 contribute their learning paths, insights, and experiences to collectively accelerate the
 community's journey into Microsoft AI.
 
-## Purpose
+Each branch corresponds to a video part of the [YouTube series: Microsoft AI - Advent calendar](https://www.youtube.com/watch?v=w7vU_szVncI&list=PLnh_yRm70-C2QtNLJ4q3_-O91EqjJbRbx)
 
-The core purpose of this repository is to serve as a learning platform where both the author and
-any user can contribute to the exploration of Microsoft's AI capabilities. As we all learn together,
-this starter kit becomes a valuable resource for users at various stages of their AI learning
-journey.
+## Microsoft AI - Advent calendar - Day 02: How to deploy Azure OpenAI Service using Bicep IaC
+
+YouTube video: [Day 2 - Azure AI Services - Azure Open AI Service](https://youtu.be/4nskAgUtsPc)
+
+An exploration video of the Azure Open AI service. Exploring:
+How to deploy Azure Open AI Service using Bicep Infrastructure as Code?
+
+- Setting up a repository structure
+- How to set-up modules
+- How to set-up a controller to consume modules modules
+- Using parameters
+- Create a PowerShell snippet to deploy bicep
+- Using PowerShell to execute the deployment
+
+External links:
+https://learn.microsoft.com/en-us/azure/ai-services/create-account-bicep?tabs=PowerShell&wt.mc_id=DT-MVP-5005327
+https://learn.microsoft.com/en-us/azure/templates/microsoft.cognitiveservices/accounts?pivots=deployment-language-bicep&wt.mc_id=DT-MVP-5005327
 
 ## Contribution
 

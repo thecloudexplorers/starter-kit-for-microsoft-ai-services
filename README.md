@@ -4,6 +4,8 @@ This starter kit has been written during the learning process, and now, everyone
 contribute their learning paths, insights, and experiences to collectively accelerate the
 community's journey into Microsoft AI.
 
+Each branch corresponds to a video part of the [YouTube series: Microsoft AI - Advent calendar](https://www.youtube.com/watch?v=w7vU_szVncI&list=PLnh_yRm70-C2QtNLJ4q3_-O91EqjJbRbx)
+
 ## Purpose
 
 The core purpose of this repository is to serve as a learning platform where both the author and

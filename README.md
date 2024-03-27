@@ -4,12 +4,25 @@ This starter kit has been written during the learning process, and now, everyone
 contribute their learning paths, insights, and experiences to collectively accelerate the
 community's journey into Microsoft AI.
 
-## Purpose
+Each branch corresponds to a video part of the [YouTube series: Microsoft AI - Advent calendar](https://www.youtube.com/watch?v=w7vU_szVncI&list=PLnh_yRm70-C2QtNLJ4q3_-O91EqjJbRbx)
 
-The core purpose of this repository is to serve as a learning platform where both the author and
-any user can contribute to the exploration of Microsoft's AI capabilities. As we all learn together,
-this starter kit becomes a valuable resource for users at various stages of their AI learning
-journey.
+## Day 08: How to assign service quota using Bicep IaC
+
+[YouTube video](https://youtu.be/liyIymJx-jI)
+
+An exploration video of the Azure Open AI service. Exploring:
+
+- How the use your data upload files option works
+- What Azure infrastructure is required for it to work
+- Live demonstration of its working
+- Showing the limitation of the functionality
+- Providing example code for the required infrastructure
+
+Documentation links:
+
+- [Quickstart: Chat with Azure OpenAI models using your own data](https://learn.microsoft.com/en-us/azure/ai-services/openai/use-your-data-quickstart?tabs=powershell%2Cpython&pivots=rest-api&wt.mc_id=DT-MVP-5005327)
+- [Azure OpenAI On Your Data](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data?tabs=ai-search&wt.mc_id=DT-MVP-5005327)
+- [Cross-Origin Resource Sharing (CORS) support for Azure Storage](https://learn.microsoft.com/en-us/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services?wt.mc_id=DT-MVP-5005327)
 
 ## Contribution
 
